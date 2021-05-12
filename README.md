@@ -28,7 +28,8 @@ It should be fine to put all these in a directory that is on the MATLAB path.
     % or use the shortcut
     sbc
 
-
+## Example
+![plot](./sbchan_map.png)
 
 
 

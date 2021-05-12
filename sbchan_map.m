@@ -86,7 +86,7 @@ function H = sbchan_map(cstr,cstr2,stime)
 % ---------------------------------------------------------------------
 % coastline color
 ccolor = 'k';
-cls = 2; % line width
+cls = 1; % line width
 
 % Axes and labels font size (from pub standards)
 fontsize = 14;
@@ -99,6 +99,12 @@ fontsize = 14;
 
 % when toggle is 1, bathymetry is plotted
 toggle=1;
+
+% switch for high res coastline
+hires = true; 
+
+% keyboard
+% ... not doing this now: strcmp(varargin,'hi')
 
 % case 1, defalt to blue line, bathy, no extra moorings
 if nargin==0
@@ -150,25 +156,27 @@ hold on
 
 % -------------------
 % COASTLINE 
-% * Coastline gets plotted with land patch *
+% * Coastline TYPICALLY gets plotted with land patch *
 % 
-% This all commented out since it plots very high resolution coast which is
+% This plots very high resolution coast which is
 % not needed for channel sized plots
 
-% load sbcoast.mat
-% plot(sbcoast_lon2,sbcoast_lat2,cstr,'LineWidth',cls);
-% 
-% % South of Oxnard
-% load('coast.dat')
-% plot(coast,coast,cstr,'LineWidth',cls); 
-% 
-% % Gets past mex border
-% load('coast2.dat')
-% plot(coast2(:,1),coast2(:,2),cstr,'LineWidth',1.5); 
-
-% load COAST4_124_29.mat
-% plot(ncst(:,1),ncst(:,2),cstr,'LineWidth',cls)
-
+if hires
+    % load sbcoast.mat
+    % plot(sbcoast_lon2,sbcoast_lat2,cstr,'LineWidth',cls);
+    %
+    % Santa Cruz to Boarder Park
+    load('coast.dat')
+    plot(coast(:,1),coast(:,2),cstr,'LineWidth',cls);
+    %
+    % % Gets past mex border
+    % load('coast2.dat')
+    % plot(coast2(:,1),coast2(:,2),cstr,'LineWidth',1.5);
+    
+    % Not particularly high resolution (used in patch?)
+    % load COAST4_124_29.mat
+    % plot(ncst(:,1),ncst(:,2),cstr,'LineWidth',cls)
+end
 
 
 % -------------------
@@ -194,7 +202,9 @@ if labs
     
     % -------------------
     % LAND PATCHES
-    H.land = land_color([.75 .75 .75]);
+    if ~hires
+        H.land = land_color([.75 .75 .75]);
+    end
 
 
     % HF SITES

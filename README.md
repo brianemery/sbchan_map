@@ -31,5 +31,7 @@ It should be fine to put all these in a directory that is on the MATLAB path.
 ## Example
 ![plot](./sbchan_map.png)
 
-
+## To do
+- add distance scale
+- add example to show bathy depths
 
